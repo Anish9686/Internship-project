@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Beautiful weather and news app with real-time forecasts and location-based news updates">
+    <title>WeatherVue - Real-Time Weather & Local News</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+        <div class="floating-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🌤️</span>
+                <h1>WeatherVue</h1>
+            </div>
+            <p class="tagline">Real-time weather & local news at your fingertips</p>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    <input type="text" id="cityInput" class="search-input" placeholder="Search for a city..."
+                        autocomplete="off">
+                    <button id="searchBtn" class="search-btn">
+                        Search
+                    </button>
+                </div>
+                <button id="locationBtn" class="location-btn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z"></path>
+                        <circle cx="12" cy="9" r="2.5"></circle>
+                    </svg>
+                    Use My Location
+                </button>
+            </div>
+        </section>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-state hidden">
+            <div class="loader">
+                <div class="loader-spinner"></div>
+            </div>
+            <p>Fetching weather data...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="error-state hidden">
+            <div class="error-icon">⚠️</div>
+            <h3>Oops! Something went wrong</h3>
+            <p id="errorMessage">Unable to fetch weather data. Please try again.</p>
+            <button id="retryBtn" class="retry-btn">Try Again</button>
+        </div>
+
+        <!-- Weather Display -->
+        <main id="weatherDisplay" class="weather-display hidden">
+            <!-- Current Weather Card -->
+            <section class="current-weather-card glass-card">
+                <div class="current-weather-header">
+                    <div class="location-info">
+                        <h2 id="cityName">--</h2>
+                        <p id="dateTime">--</p>
+                    </div>
+                    <div class="weather-icon-large" id="currentWeatherIcon">
+                        🌤️
+                    </div>
+                </div>
+
+                <div class="current-weather-body">
+                    <div class="temperature-display">
+                        <span class="temp-value" id="currentTemp">--</span>
+                        <span class="temp-unit">°C</span>
+                    </div>
+                    <p class="weather-description" id="weatherDescription">--</p>
+                </div>
+
+                <div class="weather-details-grid">
+                    <div class="detail-item">
+                        <div class="detail-icon">💧</div>
+                        <div class="detail-info">
+                            <span class="detail-value" id="humidity">--%</span>
+                            <span class="detail-label">Humidity</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">💨</div>
+                        <div class="detail-info">
+                            <span class="detail-value" id="windSpeed">-- km/h</span>
+                            <span class="detail-label">Wind Speed</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">🌡️</div>
+                        <div class="detail-info">
+                            <span class="detail-value" id="feelsLike">--°C</span>
+                            <span class="detail-label">Feels Like</span>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">☀️</div>
+                        <div class="detail-info">
+                            <span class="detail-value" id="uvIndex">--</span>
+                            <span class="detail-label">UV Index</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hourly Forecast -->
+            <section class="hourly-section">
+                <h3 class="section-title">⏰ Hourly Forecast</h3>
+                <div class="hourly-scroll-container">
+                    <div class="hourly-grid" id="hourlyGrid">
+                        <!-- Hourly forecast cards will be dynamically inserted here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7-Day Forecast -->
+            <section class="forecast-section">
+                <h3 class="section-title">📅 7-Day Forecast</h3>
+                <div class="forecast-grid" id="forecastGrid">
+                    <!-- Forecast cards will be dynamically inserted here -->
+                </div>
+            </section>
+
+            <!-- Additional Info -->
+            <section class="additional-info">
+                <div class="info-card glass-card">
+                    <h4>🌅 Sunrise & Sunset</h4>
+                    <div class="sun-times">
+                        <div class="sun-item">
+                            <span class="sun-icon">🌅</span>
+                            <span id="sunrise">--:--</span>
+                            <span class="sun-label">Sunrise</span>
+                        </div>
+                        <div class="sun-divider"></div>
+                        <div class="sun-item">
+                            <span class="sun-icon">🌇</span>
+                            <span id="sunset">--:--</span>
+                            <span class="sun-label">Sunset</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="info-card glass-card">
+                    <h4>📊 Today's Range</h4>
+                    <div class="temp-range">
+                        <div class="range-item">
+                            <span class="range-icon">🔺</span>
+                            <span class="range-value" id="maxTemp">--°C</span>
+                            <span class="range-label">High</span>
+                        </div>
+                        <div class="range-bar">
+                            <div class="range-fill" id="tempRangeFill"></div>
+                        </div>
+                        <div class="range-item">
+                            <span class="range-icon">🔻</span>
+                            <span class="range-value" id="minTemp">--°C</span>
+                            <span class="range-label">Low</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Local News Section -->
+            <section class="news-section">
+                <h3 class="section-title">📰 Latest News from <span id="newsLocation">--</span></h3>
+                <div id="newsLoading" class="news-loading hidden">
+                    <div class="loader-spinner small"></div>
+                    <span>Fetching news...</span>
+                </div>
+                <div class="news-grid" id="newsGrid">
+                    <!-- News cards will be dynamically inserted here -->
+                </div>
+                <p id="newsError" class="news-error hidden">Unable to fetch news for this location.</p>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> & <a
+                    href="https://gnews.io/" target="_blank" rel="noopener">GNews API</a></p>
+            <p>© 2026 WeatherVue. Built with ❤️</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
