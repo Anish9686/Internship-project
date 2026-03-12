@@ -1,0 +1,33 @@
+{
+    "manifest_version": 3,
+    "name": "Tracklytics",
+    "version": "1.0.0",
+    "description": "Track the time spent on websites and generate productivity analytics.",
+    "permissions": [
+        "tabs",
+        "storage",
+        "activeTab",
+        "alarms",
+        "idle"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "background": {
+        "service_worker": "background/background.js",
+        "type": "module"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content/content.js"
+            ]
+        }
+    ],
+    "action": {
+        "default_popup": "popup/popup.html"
+    }
+}

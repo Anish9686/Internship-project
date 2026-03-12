@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Tracklytics</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      width: 320px;
+      margin: 0;
+      padding: 16px;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon {
+      width: 24px;
+      height: 24px;
+      color: #2563eb;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e2e8f0;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .productive-text {
+      color: #16a34a;
+    }
+
+    .unproductive-text {
+      color: #dc2626;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-bottom: 8px;
+    }
+
+    button:hover {
+      background-color: #1d4ed8;
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: #2563eb;
+      border: 1px solid #2563eb;
+    }
+
+    .btn-outline:hover {
+      background-color: #eff6ff;
+    }
+
+    p.status {
+      font-size: 0.75rem;
+      color: #64748b;
+      text-align: center;
+      margin-top: 12px;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>
+    <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    Tracklytics
+  </h2>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Productive</div>
+      <div class="stat-value productive-text" id="productive-time">0m</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Unproductive</div>
+      <div class="stat-value unproductive-text" id="unproductive-time">0m</div>
+    </div>
+  </div>
+
+  <button id="sync-btn">Force Sync Data</button>
+  <button id="dashboard-btn" class="btn-outline">Open Dashboard</button>
+
+  <p class="status" id="status-text">Tracking active...</p>
+
+  <script type="module" src="popup.js"></script>
+</body>
+
+</html>
