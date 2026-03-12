@@ -60,6 +60,27 @@ A full-stack collaborative editor allowing multiple users to edit documents simu
 ---
 
 
+## ⏱ Task 4 - Productivity Time Tracker (Tracklytics)
+
+A Chrome Extension with a full-stack dashboard to track website usage and analyze productivity.
+
+### Tech Stack
+- Chrome Extension (Manifest V3)
+- React (Vite)
+- Node.js
+- Express
+- MongoDB
+
+### Features
+- Tracks time spent on websites
+- Categorizes sites as productive or unproductive
+- Productivity analytics dashboard
+- Website usage reports
+- Weekly productivity insights
+
+---
+
+
 ## How to Run
 1. Clone the repository:
    ```bash
