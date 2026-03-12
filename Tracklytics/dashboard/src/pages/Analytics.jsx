@@ -12,7 +12,7 @@ const WEEKLY_DATA = [
     { name: 'Sun', Productive: 1, Unproductive: 5 },
 ];
 
-const StatBadge = ({ title, value, trend, icon: Icon, isPositive }) => (
+const StatBadge = ({ title, value, trend, icon: StatIcon, isPositive }) => (
     <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
         <div>
             <p className="text-sm text-gray-500 mb-1">{title}</p>
@@ -22,7 +22,7 @@ const StatBadge = ({ title, value, trend, icon: Icon, isPositive }) => (
             </p>
         </div>
         <div className="bg-blue-50 p-4 rounded-xl text-blue-600">
-            <Icon className="w-6 h-6" />
+            <StatIcon className="w-6 h-6" />
         </div>
     </div>
 );

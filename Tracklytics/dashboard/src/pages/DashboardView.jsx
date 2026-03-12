@@ -31,7 +31,7 @@ const formatTime = (seconds) => {
     return `${h}h ${m}m`;
 };
 
-const StatCard = ({ title, value, icon: Icon, colorClass, borderClass }) => (
+const StatCard = ({ title, value, icon: StatIcon, colorClass, borderClass }) => (
     <div className={`bg-white rounded-2xl p-6 shadow-sm border-l-4 ${borderClass}`}>
         <div className="flex items-center justify-between pointer-events-none">
             <div>
@@ -39,7 +39,7 @@ const StatCard = ({ title, value, icon: Icon, colorClass, borderClass }) => (
                 <h3 className="text-2xl font-bold text-gray-900">{value}</h3>
             </div>
             <div className={`p-3 rounded-xl ${colorClass}`}>
-                <Icon className="w-6 h-6" />
+                <StatIcon className="w-6 h-6" />
             </div>
         </div>
     </div>
@@ -64,8 +64,8 @@ const DashboardView = () => {
                 };
 
                 const [dailyRes, websitesRes] = await Promise.all([
-                    fetch('http://localhost:5000/api/analytics/daily', { headers }),
-                    fetch('http://localhost:5000/api/analytics/websites', { headers })
+                    fetch('http://localhost:5000/analytics/daily', { headers }),
+                    fetch('http://localhost:5000/analytics/websites', { headers })
                 ]);
 
                 if (dailyRes.ok && websitesRes.ok) {
